@@ -117,6 +117,8 @@
       line-height: 1.7;
       position: relative;
       padding-left: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
     }
 
     li:before {
@@ -127,12 +129,21 @@
       left: 0;
     }
 
+    li.selected {
+      color: var(--primary);
+      background: var(--accent);
+      padding: 8px 8px 8px 28px;
+      border-radius: 5px;
+      margin-left: -8px;
+      margin-right: -8px;
+    }
+
     section:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 20px var(--shadow);
     }
 
-    li:hover {
+    li:hover:not(.selected) {
       color: var(--primary);
     }
 
@@ -351,6 +362,14 @@
       sections.forEach((section, index) => {
         section.classList.add('animate__animated', 'animate__fadeInUp');
         section.style.animationDelay = `${index * 0.1}s`;
+      });
+
+      // Add click to toggle selected on list items
+      const listItems = document.querySelectorAll('li');
+      listItems.forEach(item => {
+        item.addEventListener('click', () => {
+          item.classList.toggle('selected');
+        });
       });
     });
   </script>
